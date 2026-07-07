@@ -33,8 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // 3. Header Sticky Styling on Scroll
+   // 3. Logika Rating Bintang
+        function setRating(rating) {
+            document.getElementById('revRating').value = rating;
+            const stars = document.getElementById('starContainer').children;
+            for(let i = 0; i < stars.length; i++) {
+                if(i < rating) {
+                    stars[i].classList.remove('text-slate-300');
+                    stars[i].classList.add('text-yellow-400');
+                } else {
+                    stars[i].classList.remove('text-yellow-400');
+                    stars[i].classList.add('text-slate-300');
+                }
+            }
+        }
+    // 4. Header Sticky Styling on Scroll
     const header = document.querySelector('.header');
     
     const checkHeaderSticky = () => {
@@ -52,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', checkHeaderSticky);
     checkHeaderSticky(); // Run once initially
 
-    // 4. Active Navigation Links Highlighting on Scroll
+    // 5. Active Navigation Links Highlighting on Scroll
     const sections = document.querySelectorAll('section[id]');
     
     const highlightNavOnScroll = () => {
@@ -73,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightNavOnScroll);
 
-    // 5. WhatsApp Consultation Form Handler
+    // 6. WhatsApp Consultation Form Handler
     const consultationForm = document.getElementById('consultationForm');
     
     if (consultationForm) {
@@ -120,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5.5 CCTV Packages Slider Logic
+    // 6.6 CCTV Packages Slider Logic
     const packagesGrid = document.getElementById('packagesGrid');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -186,8 +199,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Handle window resizing to make sure calculations remain correct
         window.addEventListener('resize', updateDots);
     }
+   // 7. Logika Submit Form Ulasan
+        function submitReview(e) {
+            e.preventDefault();
+            const name = document.getElementById('revName').value;
+            showMessage("Terima Kasih!", `Ulasan dari Bapak/Ibu ${name} telah berhasil kami terima. Masukan Anda sangat berarti bagi peningkatan layanan kami.`);
+            e.target.reset();
+            setRating(5); // Reset bintang ke 5
+        }
 
-    // 6. Smooth Scroll for Anchor Links (Polite backup)
+    // 8. Smooth Scroll for Anchor Links (Polite backup)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
