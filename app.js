@@ -802,55 +802,6 @@ function initTestimonials() {
         });
     }
 
-    // Dynamic verification send handlers for static deployment
-    const verifyWaBtn = document.getElementById("testi-verify-wa-btn");
-    const verifyEmailBtn = document.getElementById("testi-verify-email-btn");
-
-    if (verifyWaBtn) {
-        verifyWaBtn.addEventListener("click", () => {
-            if (!lastSubmittedReview) return;
-            const r = lastSubmittedReview;
-            let stars = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
-            
-            let messageText = `Halo Admin AAA Solusi CCTV,\n\nSaya baru saja mengirim ulasan/testimoni pelanggan baru untuk diverifikasi agar dapat tampil di website:\n\n`;
-            messageText += `*DETAIL ULASAN PELANGGAN:*\n`;
-            messageText += `- Nama: ${r.name}\n`;
-            messageText += `- Status: ${r.role}\n`;
-            messageText += `- Rating: ${stars} (${r.rating}/5)\n`;
-            messageText += `- Tanggal: ${r.date}\n\n`;
-            messageText += `*ISI ULASAN:*\n`;
-            messageText += `"${r.text}"\n\n`;
-            messageText += `Mohon segera verifikasi dan publish ulasan ini secara permanen. Terima kasih!`;
-
-            const encodedMessage = encodeURIComponent(messageText);
-            const waUrl = `https://api.whatsapp.com/send?phone=6285888098639&text=${encodedMessage}`;
-            window.open(waUrl, "_blank");
-        });
-    }
-
-    if (verifyEmailBtn) {
-        verifyEmailBtn.addEventListener("click", () => {
-            if (!lastSubmittedReview) return;
-            const r = lastSubmittedReview;
-            let stars = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
-            
-            let emailBody = `Halo Admin AAA Solusi CCTV,\n\nSaya ingin mengirim ulasan/testimoni pelanggan baru untuk diverifikasi agar dapat tampil di website:\n\n`;
-            emailBody += `DETAIL ULASAN PELANGGAN:\n`;
-            emailBody += `- Nama: ${r.name}\n`;
-            emailBody += `- Status: ${r.role}\n`;
-            emailBody += `- Rating: ${stars} (${r.rating}/5)\n`;
-            emailBody += `- Tanggal: ${r.date}\n\n`;
-            emailBody += `ISI ULASAN:\n`;
-            emailBody += `"${r.text}"\n\n`;
-            emailBody += `Mohon segera diverifikasi dan ditampilkan di halaman ulasan.\n\nTerima kasih.`;
-
-            const subject = encodeURIComponent(`Verifikasi Ulasan Baru - AAA Solusi (${r.name})`);
-            const body = encodeURIComponent(emailBody);
-            
-            window.location.href = `mailto:aaasolusi@gmail.com?subject=${subject}&body=${body}`;
-        });
-    }
-
     // Reset testimonial ulasan form
     if (resetBtn) {
         resetBtn.addEventListener("click", () => {
